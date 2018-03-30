@@ -3,12 +3,12 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test name="Default test(failed)">
     <classes>
-      <class name="Publisher.Publisher_Loc">
+      <class name="UnitTests.Author_Application">
         <methods>
-          <include name="pubLogin"/>
           <include name="setUp"/>
+          <include name="Positive_Author_Login"/>
         </methods>
-      </class> <!-- Publisher.Publisher_Loc -->
+      </class> <!-- UnitTests.Author_Application -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

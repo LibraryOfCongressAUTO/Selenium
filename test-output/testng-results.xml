@@ -2,20 +2,20 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2018-03-30T02:46:31Z" name="Default suite" finished-at="2018-03-30T02:47:29Z" duration-ms="57971">
+  <suite started-at="2018-03-30T03:31:44Z" name="Default suite" finished-at="2018-03-30T03:31:53Z" duration-ms="9328">
     <groups>
     </groups>
-    <test started-at="2018-03-30T02:46:31Z" name="Default test" finished-at="2018-03-30T02:47:29Z" duration-ms="57971">
-      <class name="Publisher.Publisher_Loc">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:Publisher.Publisher_Loc@587e5365]" started-at="2018-03-29T19:46:31Z" name="setUp" finished-at="2018-03-29T19:46:35Z" duration-ms="4124" status="PASS">
+    <test started-at="2018-03-30T03:31:44Z" name="Default test" finished-at="2018-03-30T03:31:53Z" duration-ms="9328">
+      <class name="UnitTests.Author_Application">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:UnitTests.Author_Application@63475ace]" started-at="2018-03-29T20:31:44Z" name="setUp" finished-at="2018-03-29T20:31:48Z" duration-ms="3899" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="pubLogin()[pri:0, instance:Publisher.Publisher_Loc@587e5365]" started-at="2018-03-29T19:46:35Z" name="pubLogin" finished-at="2018-03-29T19:47:29Z" duration-ms="53822" status="PASS">
+        <test-method signature="Negative_Author_Login()[pri:3, instance:UnitTests.Author_Application@63475ace]" started-at="2018-03-29T20:31:48Z" name="Negative_Author_Login" finished-at="2018-03-29T20:31:53Z" duration-ms="5395" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- pubLogin -->
-      </class> <!-- Publisher.Publisher_Loc -->
+        </test-method> <!-- Negative_Author_Login -->
+      </class> <!-- UnitTests.Author_Application -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
