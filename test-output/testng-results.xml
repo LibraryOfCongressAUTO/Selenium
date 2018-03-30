@@ -2,12 +2,16 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2018-03-26T20:11:25Z" name="Default suite" finished-at="2018-03-26T20:12:32Z" duration-ms="66991">
+  <suite started-at="2018-03-30T02:46:31Z" name="Default suite" finished-at="2018-03-30T02:47:29Z" duration-ms="57971">
     <groups>
     </groups>
-    <test started-at="2018-03-26T20:11:25Z" name="Default test" finished-at="2018-03-26T20:12:32Z" duration-ms="66991">
+    <test started-at="2018-03-30T02:46:31Z" name="Default test" finished-at="2018-03-30T02:47:29Z" duration-ms="57971">
       <class name="Publisher.Publisher_Loc">
-        <test-method signature="pubLogin()[pri:0, instance:Publisher.Publisher_Loc@6c40365c]" started-at="2018-03-26T13:11:25Z" name="pubLogin" finished-at="2018-03-26T13:12:32Z" duration-ms="66962" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:Publisher.Publisher_Loc@587e5365]" started-at="2018-03-29T19:46:31Z" name="setUp" finished-at="2018-03-29T19:46:35Z" duration-ms="4124" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="pubLogin()[pri:0, instance:Publisher.Publisher_Loc@587e5365]" started-at="2018-03-29T19:46:35Z" name="pubLogin" finished-at="2018-03-29T19:47:29Z" duration-ms="53822" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- pubLogin -->

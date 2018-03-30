@@ -2,56 +2,29 @@ package Publisher;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import Util.Base;
 
-public class Publisher_Loc {
+public class Publisher_Registration extends Base {
 
-	static WebDriver driver;
+	
 	static String URL = "https://locexternaldev.service-now.com/pub";
-
+	
 	@Test
-	public void pubLogin() throws Throwable {
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Erkin\\Desktop\\drivers\\chromedriver.exe");
-		driver = new ChromeDriver();
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		
-
-		driver.manage().window().maximize();
+	public void NewPublisherRegistration() throws Throwable {
+	
 		driver.get(URL);
 		System.out.println("The URL captured is : " + driver.getCurrentUrl());
 		System.out.println("The title of the URL is : " + driver.getTitle());
 
-		// // making sure there are 2 options for ECIP landing page.. author/publisher
-		// List<WebElement> landingpageoptions = new ArrayList<>();
-		// landingpageoptions = driver.findElements(By.xpath("//*[@class='btn
-		// btn-primary btn-lg']"));
-		//
-		// Boolean equalToTwo = landingpageoptions.size() == 2;
-		// if (equalToTwo) {
-		// System.out.println("ECIP landing page clickable options is equal to 2 -
-		// PASS");
-		// } else {
-		// System.out.println("ECIP landing page clickable Options NOT equal to 2.
-		// Actual size is : "
-		// + landingpageoptions.size() + " - FAIL");
-		// }
-
-		// driver.findElement(By.xpath("(//*[@class='btn btn-primary
-		// btn-lg'])[2]")).click();
-
 		// register a new publisher account
 		Thread.sleep(1000);
 		driver.findElement(By.xpath("//*[@class='btn btn-secondary']")).click();
+		
+		Thread.sleep(1500);
 		driver.findElement(By.xpath("(//*[@class='btn btn-default btn-lg'])[1]")).click();
 		
 		// Your Information Section (1)---------------------------------------------------------------
@@ -76,6 +49,7 @@ public class Publisher_Loc {
 		driver.findElement(By.xpath("//INPUT[@id='regLastName']")).sendKeys("Test1");
 		driver.findElement(By.xpath("//INPUT[@id='regPhone']")).sendKeys("1111111111");
 		driver.findElement(By.xpath("//INPUT[@id='regStreet1']")).sendKeys("testStreet1");
+		driver.findElement(By.xpath("//INPUT[@id='regStreet2']")).sendKeys("testStreetCont1");
 		driver.findElement(By.xpath("//INPUT[@id='regCity']")).sendKeys("testCity1");
 
 		List<WebElement> stateList1 = new ArrayList<>();
@@ -117,6 +91,7 @@ public class Publisher_Loc {
 
 		driver.findElement(By.xpath("(//*[@class='btn btn-default btn-lg'])[3]")).click();
 		driver.findElement(By.xpath("//INPUT[@id='pubStreet1']")).sendKeys("publisherStreet2");
+		driver.findElement(By.xpath("//INPUT[@id='pubStreet2']")).sendKeys("publisherStreetCont2");
 		driver.findElement(By.xpath("//INPUT[@id='pubCity']")).sendKeys("publisherCity2");
 
 		List<WebElement> stateList2 = new ArrayList<>();
@@ -135,7 +110,7 @@ public class Publisher_Loc {
 
 		driver.findElement(By.xpath("//INPUT[@id='pubZip']")).sendKeys("22222");
 		driver.findElement(By.xpath("//INPUT[@id='pubPhone']")).sendKeys("2222222222");
-		driver.findElement(By.xpath("//INPUT[@id='pubWebsite']")).sendKeys("Test2@Example");
+		driver.findElement(By.xpath("//INPUT[@id='pubWebsite']")).sendKeys("www.test2.com");
 		driver.findElement(By.xpath("(//*[@class='btn btn-default btn-lg'])[6]")).click();
 
 		// Primary Contact Information (3)------------------------------------------------------------------
@@ -145,6 +120,7 @@ public class Publisher_Loc {
 		driver.findElement(By.xpath("//INPUT[@id='contLastName']")).sendKeys("Test3");
 		driver.findElement(By.xpath("//INPUT[@id='contTitle']")).sendKeys("Title3");
 		driver.findElement(By.xpath("//INPUT[@id='contStreet1']")).sendKeys("testStreet3");
+		driver.findElement(By.xpath("//INPUT[@id='contStreet2']")).sendKeys("testStreetCont3");	
 		driver.findElement(By.xpath("//INPUT[@id='contCity']")).sendKeys("testCity3");
 		driver.findElement(By.xpath("//INPUT[@id='contZip']")).sendKeys("33333");
 		
@@ -167,6 +143,7 @@ public class Publisher_Loc {
 		driver.findElement(By.xpath("(//*[@class='btn btn-default btn-lg'])[10]")).click();
 		Thread.sleep(2000);
 		
+		
 		// Senior Officer Information (4)---------------------------------------------------------------------
 		
 		driver.findElement(By.xpath("(//*[@class='btn btn-default btn-lg'])[12]")).click();
@@ -174,6 +151,7 @@ public class Publisher_Loc {
 		driver.findElement(By.xpath("//INPUT[@id='officerLastName']")).sendKeys("Test4");
 		driver.findElement(By.xpath("//INPUT[@id='officer_title']")).sendKeys("Title4");
 		driver.findElement(By.xpath("//INPUT[@id='officerStreet1']")).sendKeys("testStreet4");
+		driver.findElement(By.xpath("//INPUT[@id='officerStreet2']")).sendKeys("testStreetCont4");
 		driver.findElement(By.xpath("//INPUT[@id='officerCity']")).sendKeys("testCity4");
 		driver.findElement(By.xpath("//INPUT[@id='officerZip']")).sendKeys("44444");
 		
@@ -205,20 +183,20 @@ public class Publisher_Loc {
 				RegistrantInfo = driver.findElements(By.xpath("(//*[@id='registrant']/*/*/*)"));
 				
 				Assert.assertEquals(RegistrantInfo.size(), 10, "Size of registrant info is NOT (10)");
-				System.out.println("Size of Registrant Info is " + RegistrantInfo.size());
+				System.out.println("Size of Registrant Info fields populated is " + RegistrantInfo.size());
 
 				for (int i = 0; i < RegistrantInfo.size(); i++) {
 
 					System.out.println("(Registrant Info) " +  RegistrantInfo.get(i).getText());
 				}
 
-				
+				System.out.println(":" + driver.findElement(By.xpath("((//*[@id='publisher']/*/*/*)[7]/*)[2]")).getText());
 				
 				List<WebElement> PublisherInfo = new ArrayList<>();
 				PublisherInfo = driver.findElements(By.xpath("(//*[@id='publisher']/*/*/*)"));
 				
 				Assert.assertEquals(PublisherInfo.size(), 8 , "Size of publisher info is NOT (8)");
-				System.out.println("Size of Publisher Info is " + PublisherInfo.size());
+				System.out.println("Size of Publisher Info fields populated is " + PublisherInfo.size());
 
 				for (int i = 0; i < PublisherInfo.size(); i++) {
 

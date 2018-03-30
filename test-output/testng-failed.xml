@@ -6,6 +6,7 @@
       <class name="Publisher.Publisher_Loc">
         <methods>
           <include name="pubLogin"/>
+          <include name="setUp"/>
         </methods>
       </class> <!-- Publisher.Publisher_Loc -->
     </classes>
