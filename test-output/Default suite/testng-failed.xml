@@ -6,7 +6,7 @@
       <class name="UnitTests.Author_Application">
         <methods>
           <include name="setUp"/>
-          <include name="Positive_Author_Login"/>
+          <include name="Verify_New_Author_Button_Is_Enabled"/>
         </methods>
       </class> <!-- UnitTests.Author_Application -->
     </classes>

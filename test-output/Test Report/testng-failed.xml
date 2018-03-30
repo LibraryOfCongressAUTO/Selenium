@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
-  <test name="Default test(failed)">
+<suite name="Failed suite [Test Report]" guice-stage="DEVELOPMENT">
+  <test name="Unit Test Report (Author Application)(failed)">
     <classes>
       <class name="UnitTests.Author_Application">
         <methods>
           <include name="setUp"/>
-          <include name="Verify_New_Author_Button_Is_Enabled"/>
+          <include name="Negative_Author_Login"/>
         </methods>
       </class> <!-- UnitTests.Author_Application -->
     </classes>
-  </test> <!-- Default test(failed) -->
-</suite> <!-- Failed suite [Default suite] -->
+  </test> <!-- Unit Test Report (Author Application)(failed) -->
+</suite> <!-- Failed suite [Test Report] -->

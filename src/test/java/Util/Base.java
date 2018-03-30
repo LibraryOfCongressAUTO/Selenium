@@ -1,14 +1,13 @@
 package Util;
 
 import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeMethod;
 
 public class Base {
 
-	public WebDriver driver;
+	public static WebDriver driver;
 	
 
 	@BeforeMethod
@@ -20,5 +19,6 @@ public class Base {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 	}
+	
 	
 }
