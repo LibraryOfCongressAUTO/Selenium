@@ -10,7 +10,7 @@ public class Author_Application extends Base {
 	static String AUTHORURL = "https://locexternaldev.service-now.com/auth";
 	static String AUTHORTITLE = "CIP Author Login - CIP Author Portal";
 
-	 //@Test(priority = 0)
+	 @Test(priority = 0)
 	public void Verify_Author_URL() {
 
 		driver.get(AUTHORURL);
@@ -20,7 +20,7 @@ public class Author_Application extends Base {
 		driver.quit();
 	}
 
-	// @Test(priority = 1)
+	@Test(priority = 1)
 	public void Verify_Author_Title() {
 		driver.get(AUTHORURL);
 		System.out.println("Expected Title is : " + AUTHORTITLE);
@@ -29,7 +29,7 @@ public class Author_Application extends Base {
 		driver.quit();
 	}
 
-	// @Test(priority = 2)
+	@Test(priority = 2)
 	public void Positive_Author_Login() throws Throwable {
 		driver.get(AUTHORURL);
 		driver.findElement(By.xpath("//INPUT[@id='username']")).sendKeys("Loc1.Tester1");
@@ -41,7 +41,7 @@ public class Author_Application extends Base {
 		driver.quit();
 	}
 
-	//@Test(priority = 3)
+	@Test(priority = 3)
 	public void Negative_Author_Login() throws Throwable {
 		driver.get(AUTHORURL);
 		driver.findElement(By.xpath("//INPUT[@id='username']")).sendKeys("Test");
