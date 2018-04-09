@@ -3,12 +3,12 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test name="Default test(failed)">
     <classes>
-      <class name="UnitTests.Publisher_Application">
+      <class name="Author.LCCN_Application">
         <methods>
-          <include name="Verify_New_Publisher_Button_Is_Enabled"/>
           <include name="setUp"/>
+          <include name="newLCCNRegistration"/>
         </methods>
-      </class> <!-- UnitTests.Publisher_Application -->
+      </class> <!-- Author.LCCN_Application -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

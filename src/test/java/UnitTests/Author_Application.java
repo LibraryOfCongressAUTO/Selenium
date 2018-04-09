@@ -33,7 +33,8 @@ public class Author_Application extends Base {
 	public void Positive_Author_Login() throws Throwable {
 		driver.get(AUTHORURL);
 		driver.findElement(By.xpath("//INPUT[@id='username']")).sendKeys("Loc1.Tester1");
-		driver.findElement(By.xpath("//INPUT[@id='password']")).sendKeys("LocTester@123!");
+		driver.findElement(By.xpath("//INPUT[@id='passwor"
+				+ "d']")).sendKeys("LocTester@123!");
 		Thread.sleep(1000);
 		driver.findElement(By.xpath("//BUTTON[@name='login'][text()=' Login ']")).click();
 		String requestLCCN = driver.findElement(By.xpath("(//*[@href='?id=request_lccn']/*)[2]")).getText();

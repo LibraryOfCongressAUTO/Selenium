@@ -13,9 +13,8 @@ public class Publisher_Registration extends Base {
 	
 	static String URL = "https://locexternaldev.service-now.com/pub";
 	
-	@Test
-	public void NewPublisherRegistration() throws Throwable {
 	
+	public void navigateToPublisherRegistrationForm() throws Throwable {
 		driver.get(URL);
 		System.out.println("The URL captured is : " + driver.getCurrentUrl());
 		System.out.println("The title of the URL is : " + driver.getTitle());
@@ -27,91 +26,104 @@ public class Publisher_Registration extends Base {
 		Thread.sleep(1500);
 		driver.findElement(By.xpath("(//*[@class='btn btn-default btn-lg'])[1]")).click();
 		
+	}
+	
+	public void yourInfoSection() throws Throwable {
+		
 		// Your Information Section (1)---------------------------------------------------------------
-		driver.findElement(By.xpath("//INPUT[@id='prevPubName']")).sendKeys("New Publisher Example");
+				driver.findElement(By.xpath("//INPUT[@id='prevPubName']")).sendKeys("New Publisher Example");
 
-		Thread.sleep(2000);
+				Thread.sleep(2000);
 
-		List<WebElement> titleOptions = new ArrayList<>();
-		titleOptions = driver.findElements(By.xpath("((//*[@class='col-sm-6'])[2]/*/*)"));
+				List<WebElement> titleOptions = new ArrayList<>();
+				titleOptions = driver.findElements(By.xpath("((//*[@class='col-sm-6'])[2]/*/*)"));
 
-		System.out.println("Size of Title Options is " + titleOptions.size());
+				System.out.println("Size of Title Options is " + titleOptions.size());
 
-		for (int y = 0; y < titleOptions.size(); y++) {
+				for (int y = 0; y < titleOptions.size(); y++) {
 
-			driver.findElement(By.xpath("//*[@name='regTitle']")).click();
-			titleOptions.get(y).click();
-			System.out.println("Current Title selected is : " + titleOptions.get(y).getText());
+					driver.findElement(By.xpath("//*[@name='regTitle']")).click();
+					titleOptions.get(y).click();
+					System.out.println("Current Title selected is : " + titleOptions.get(y).getText());
 
-		}
+				}
 
-		driver.findElement(By.xpath("//INPUT[@id='regFirstName']")).sendKeys("Example1");
-		driver.findElement(By.xpath("//INPUT[@id='regLastName']")).sendKeys("Test1");
-		driver.findElement(By.xpath("//INPUT[@id='regPhone']")).sendKeys("1111111111");
-		driver.findElement(By.xpath("//INPUT[@id='regStreet1']")).sendKeys("testStreet1");
-		driver.findElement(By.xpath("//INPUT[@id='regStreet2']")).sendKeys("testStreetCont1");
-		driver.findElement(By.xpath("//INPUT[@id='regCity']")).sendKeys("testCity1");
+				driver.findElement(By.xpath("//INPUT[@id='regFirstName']")).sendKeys("Example1");
+				driver.findElement(By.xpath("//INPUT[@id='regLastName']")).sendKeys("Test1");
+				driver.findElement(By.xpath("//INPUT[@id='regPhone']")).sendKeys("1111111111");
+				driver.findElement(By.xpath("//INPUT[@id='regStreet1']")).sendKeys("testStreet1");
+				driver.findElement(By.xpath("//INPUT[@id='regStreet2']")).sendKeys("testStreetCont1");
+				driver.findElement(By.xpath("//INPUT[@id='regCity']")).sendKeys("testCity1");
 
-		List<WebElement> stateList1 = new ArrayList<>();
-		stateList1 = driver.findElements(By.xpath("//*[@ng-model='regState']/*"));
+				List<WebElement> stateList1 = new ArrayList<>();
+				stateList1 = driver.findElements(By.xpath("//*[@ng-model='regState']/*"));
 
-		System.out.println("Size of State Options is " + stateList1.size());
+				System.out.println("Size of State Options is " + stateList1.size());
 
-		for (int i = 0; i < stateList1.size(); i++) {
+				for (int i = 0; i < stateList1.size(); i++) {
 
-			driver.findElement(By.xpath("(//*[@ng-model='regState']/..)[1]")).click();
-			stateList1.get(i).click();
-			System.out.println(
-					"(1st state dropdown) Current State selected :  " + stateList1.get(i).getText() + " (" + i + ")");
-		}
+					driver.findElement(By.xpath("(//*[@ng-model='regState']/..)[1]")).click();
+					stateList1.get(i).click();
+					System.out.println(
+							"(1st state dropdown) Current State selected :  " + stateList1.get(i).getText() + " (" + i + ")");
+				}
 
-		driver.findElement(By.xpath("//INPUT[@id='regZip']")).sendKeys("11111");
-		driver.findElement(By.xpath("//INPUT[@id='regEmail']")).sendKeys("Test1@Example");
-		driver.findElement(By.xpath("(//*[@class='btn btn-default btn-lg'])[2]")).click();
-
+				driver.findElement(By.xpath("//INPUT[@id='regZip']")).sendKeys("11111");
+				driver.findElement(By.xpath("//INPUT[@id='regEmail']")).sendKeys("Test1@Example");
+				driver.findElement(By.xpath("(//*[@class='btn btn-default btn-lg'])[2]")).click();
+				
+	}
+	
+	public void publisherInformationSection() throws Throwable {
+		
 		// Publisher Information Section (2)-------------------------------------------------------
 
-		// does your publisher have a U.S address?
-		driver.findElement(By.xpath("(//*[@class='btn btn-default btn-lg'])[4]")).click();
+				// does your publisher have a U.S address?
+				driver.findElement(By.xpath("(//*[@class='btn btn-default btn-lg'])[4]")).click();
 
-		Thread.sleep(1000);
+				Thread.sleep(1000);
 
-		Boolean PopUp1 = driver.findElements(By.xpath("(//*[@class='modal-content'])[1]")).size() > 0;
+				Boolean PopUp1 = driver.findElements(By.xpath("(//*[@class='modal-content'])[1]")).size() > 0;
 
-		if (PopUp1) {
-			System.out.println("Pop-Up is displayed");
-		} else {
-			System.out.println("Pop-Up is NOT displayed");
-			Assert.assertTrue(driver.findElements(By.xpath("(//*[@class='modal-content'])[1]")).size() > 0);
-		}
+				if (PopUp1) {
+					System.out.println("Pop-Up is displayed");
+				} else {
+					System.out.println("Pop-Up is NOT displayed");
+					Assert.assertTrue(driver.findElements(By.xpath("(//*[@class='modal-content'])[1]")).size() > 0);
+				}
 
-		driver.findElement(By.xpath("(//*[@class='btn btn-default'])[1]")).click();
+				driver.findElement(By.xpath("(//*[@class='btn btn-default'])[1]")).click();
 
-		Thread.sleep(2000);
+				Thread.sleep(2000);
 
-		driver.findElement(By.xpath("(//*[@class='btn btn-default btn-lg'])[3]")).click();
-		driver.findElement(By.xpath("//INPUT[@id='pubStreet1']")).sendKeys("publisherStreet2");
-		driver.findElement(By.xpath("//INPUT[@id='pubStreet2']")).sendKeys("publisherStreetCont2");
-		driver.findElement(By.xpath("//INPUT[@id='pubCity']")).sendKeys("publisherCity2");
+				driver.findElement(By.xpath("(//*[@class='btn btn-default btn-lg'])[3]")).click();
+				driver.findElement(By.xpath("//INPUT[@id='pubStreet1']")).sendKeys("publisherStreet2");
+				driver.findElement(By.xpath("//INPUT[@id='pubStreet2']")).sendKeys("publisherStreetCont2");
+				driver.findElement(By.xpath("//INPUT[@id='pubCity']")).sendKeys("publisherCity2");
 
-		List<WebElement> stateList2 = new ArrayList<>();
-		stateList2 = driver.findElements(By.xpath("//*[@ng-model='pubState']/*"));
+				List<WebElement> stateList2 = new ArrayList<>();
+				stateList2 = driver.findElements(By.xpath("//*[@ng-model='pubState']/*"));
 
-		Assert.assertEquals(stateList2.size(), 60, "Size of state list does NOT match expected number (60)");
-		System.out.println("Size of State Options is " + stateList2.size());
+				Assert.assertEquals(stateList2.size(), 60, "Size of state list does NOT match expected number (60)");
+				System.out.println("Size of State Options is " + stateList2.size());
 
-		for (int i = 0; i < stateList2.size(); i++) {
+				for (int i = 0; i < stateList2.size(); i++) {
 
-			driver.findElement(By.xpath("//*[@ng-model='pubState']")).click();
-			stateList2.get(i).click();
-			System.out.println(
-					"(2nd state dropdown) Current State selected :  " + stateList2.get(i).getText() + " (" + i + ")");
-		}
+					driver.findElement(By.xpath("//*[@ng-model='pubState']")).click();
+					stateList2.get(i).click();
+					System.out.println(
+							"(2nd state dropdown) Current State selected :  " + stateList2.get(i).getText() + " (" + i + ")");
+				}
 
-		driver.findElement(By.xpath("//INPUT[@id='pubZip']")).sendKeys("22222");
-		driver.findElement(By.xpath("//INPUT[@id='pubPhone']")).sendKeys("2222222222");
-		driver.findElement(By.xpath("//INPUT[@id='pubWebsite']")).sendKeys("www.test2.com");
-		driver.findElement(By.xpath("(//*[@class='btn btn-default btn-lg'])[6]")).click();
+				driver.findElement(By.xpath("//INPUT[@id='pubZip']")).sendKeys("22222");
+				driver.findElement(By.xpath("//INPUT[@id='pubPhone']")).sendKeys("2222222222");
+				driver.findElement(By.xpath("//INPUT[@id='pubWebsite']")).sendKeys("www.test2.com");
+				driver.findElement(By.xpath("(//*[@class='btn btn-default btn-lg'])[6]")).click();
+
+	}
+	
+	public void primaryContactSection() throws Throwable {
+		
 
 		// Primary Contact Information (3)------------------------------------------------------------------
 		
@@ -143,7 +155,12 @@ public class Publisher_Registration extends Base {
 		driver.findElement(By.xpath("(//*[@class='btn btn-default btn-lg'])[10]")).click();
 		Thread.sleep(2000);
 		
+	}
+	
+	
+	public void seniorOfficerSection() {
 		
+
 		// Senior Officer Information (4)---------------------------------------------------------------------
 		
 		driver.findElement(By.xpath("(//*[@class='btn btn-default btn-lg'])[12]")).click();
@@ -173,6 +190,12 @@ public class Publisher_Registration extends Base {
 		driver.findElement(By.xpath("//INPUT[@id='officerEmail']")).sendKeys("Test4@Example");
 		driver.findElement(By.xpath("(//*[@class='btn btn-default btn-lg'])[14]")).click();
 		
+		
+	}
+	
+	public void summaryPageSection() {
+		
+
 		//Confirmation & Summary Page
 		Assert.assertEquals(driver.findElement(By.xpath("(//*[@class='confirm-submit-sec']/*)[1]")).getText(), "CONFIRM AND SUBMIT");
 		
@@ -190,7 +213,9 @@ public class Publisher_Registration extends Base {
 					System.out.println("(Registrant Info) " +  RegistrantInfo.get(i).getText());
 				}
 
-				System.out.println(":" + driver.findElement(By.xpath("((//*[@id='publisher']/*/*/*)[7]/*)[2]")).getText());
+				//remove line once phone number bug is fixed
+				System.out.println(driver.findElement(By.xpath("((//*[@id='publisher']/*/*/*)[7]/*)[2]")).getText());
+				
 				
 				List<WebElement> PublisherInfo = new ArrayList<>();
 				PublisherInfo = driver.findElements(By.xpath("(//*[@id='publisher']/*/*/*)"));
@@ -202,6 +227,26 @@ public class Publisher_Registration extends Base {
 
 					System.out.println("(Publisher Info) " +  PublisherInfo.get(i).getText());
 				}
+		
+	}
+	@Test
+	public void NewPublisherRegistration() throws Throwable {
+		
+		System.out.println("Beginning of New Publisher Registration");
+	
+		navigateToPublisherRegistrationForm();
+		
+		yourInfoSection();
+		
+		publisherInformationSection();
+		
+		primaryContactSection();
+		
+		seniorOfficerSection();
+		
+		summaryPageSection();
+		
+		System.out.println("End of New Publisher Registration");
 		
 	}
 }
