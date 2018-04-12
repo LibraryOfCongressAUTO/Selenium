@@ -1,18 +1,11 @@
 package Author;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import Util.Base;
 
 public class LCCN_Application extends Base {
@@ -27,6 +20,7 @@ public class LCCN_Application extends Base {
 
 		// first question
 		driver.findElement(By.xpath("//*[@ng-click='formParams.eFormat = true']")).click();
+		Thread.sleep(1000);
 		int ErrorMSG1 = driver.findElements(By.xpath("//*[@class='alert alert-danger ng-binding ng-scope']")).size();
 		System.out.println("1st Message : "
 				+ driver.findElement(By.xpath("//*[@class='alert alert-danger ng-binding ng-scope']")).getText());
@@ -34,12 +28,12 @@ public class LCCN_Application extends Base {
 		driver.findElement(By.xpath("//*[@ng-click='formParams.eFormat = false']")).click();
 
 		// second question
-		driver.findElement(By.xpath("(//*[@ng-model='formParams.intendedFor'])[1]")).click();
+		driver.findElement(By.xpath("//*[@ng-model='formParams.periodicIntervals'][1]")).click();
 		int ErrorMSG2 = driver.findElements(By.xpath("//*[@class='alert alert-danger ng-binding ng-scope']")).size();
 		System.out.println("2nd Message : "
 				+ driver.findElement(By.xpath("//*[@class='alert alert-danger ng-binding ng-scope']")).getText());
 		Assert.assertEquals(ErrorMSG2, 1);
-		driver.findElement(By.xpath("(//*[@ng-model='formParams.intendedFor'])[2]")).click();
+		driver.findElement(By.xpath("//*[@ng-model='formParams.periodicIntervals'][2]")).click();
 
 		// third question
 		driver.findElement(By.xpath("(//*[@ng-model='formParams.cyAdults'])[1]")).click();
@@ -141,49 +135,129 @@ public class LCCN_Application extends Base {
 		driver.findElement(By.xpath("(//*[@ng-model='contributor.entryType']/*)[2]")).click();
 
 		addContributor.click();
-		
-		driver.findElement(By.xpath("//*[@class='btn btn-primary pull-right']")).click();
-		
-		//title page information
-		Thread.sleep(1000);
-		
-		driver.findElement(By.xpath("//*[@ng-model='formParams.titlePage.title']")).sendKeys("Example Title");
-		
-		driver.findElement(By.xpath("//*[@ng-model='formParams.titlePage.title']")).sendKeys("Example Subtitle");
-		
-		
-		driver.findElement(By.xpath("//*[@name='edition']")).sendKeys("Example Edition");
-		
-		
-		driver.findElement(By.xpath("//*[@name='titlePage.pubName']")).sendKeys("Example Title");		
-		
-		driver.findElement(By.xpath("//*[@name='titlePage.pubCity']")).sendKeys("Example City");
-		
-		
-		List<WebElement> stateList2 = new ArrayList<>();
-		stateList2 = driver.findElements(By.xpath("//*[@ng-model='pubState']/*"));
 
-		Assert.assertEquals(stateList2.size(), 60, "Size of state list does NOT match expected number (60)");
+		driver.findElement(By.xpath("//*[@class='btn btn-primary pull-right']")).click();
+
+		// title page information
+		Thread.sleep(1000);
+
+		driver.findElement(By.xpath("//*[@ng-model='formParams.titlePage.title']")).sendKeys("Example Title");
+
+		driver.findElement(By.xpath("//*[@ng-model='formParams.titlePage.title']")).sendKeys("Example Subtitle");
+
+		driver.findElement(By.xpath("//*[@name='edition']")).sendKeys("Example Edition");
+
+		driver.findElement(By.xpath("//*[@name='titlePage.pubName']")).sendKeys("Example Title");
+
+		driver.findElement(By.xpath("//*[@name='titlePage.pubCity']")).sendKeys("Example City");
+
+		List<WebElement> stateList2 = new ArrayList<>();
+		stateList2 = driver.findElements(By.xpath("//*[@ng-model='formParams.titlePage.state']/*"));
+
+		Assert.assertEquals(stateList2.size(), 58, "Size of state list does NOT match expected number (58)");
 		System.out.println("Size of State Options is " + stateList2.size());
 
 		for (int i = 0; i < stateList2.size(); i++) {
 
-			driver.findElement(By.xpath("//*[@ng-model='pubState']")).click();
+			driver.findElement(By.xpath("//*[@ng-model='formParams.titlePage.state']")).click();
 			stateList2.get(i).click();
 			System.out.println(
-					"(2nd state dropdown) Current State selected :  " + stateList2.get(i).getText() + " (" + i + ")");
+					"(1st state dropdown) Current State selected :  " + stateList2.get(i).getText() + " (" + i + ")");
 		}
 
-		
-		
+		driver.findElement(By.xpath("//*[@class='btn btn-primary pull-right']")).click();
+
+	}
+
+	public void seriesVolumeInfo() throws Throwable {
+		// SERIES
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//*[@ng-model='formParams.series.isSeries'][2]")).click();
+		driver.findElement(By.xpath("//*[@ng-model='formParams.series.isSeries'][1]")).click();
+
+		driver.findElement(By.xpath("//*[@name='seriesTitle']")).sendKeys("Series Title");
+		driver.findElement(By.xpath("//*[@name='series_volume']")).sendKeys("1");
+		driver.findElement(By.xpath("//*[@name='series_issn']")).sendKeys("123456789");
+		driver.findElement(By.xpath("//*[@class='btn btn-primary large-add'][1]")).click();
+		Thread.sleep(1000);
+
+		// driver.findElement(By.xpath("//*[@ng-click='c.removeIndex(c.series_collection,
+		// $index)']")).click();
+
+		// VOLUME
+		driver.findElement(By.xpath("//*[@ng-model='formParams.series.largeVolume'][2]")).click();
+		driver.findElement(By.xpath("//*[@ng-model='formParams.series.largeVolume'][1]")).click();
+
+		// (PRINT ISBN)
+		driver.findElement(By.xpath("//*[@name='isbn']")).sendKeys("978-3-16-148410-0");
+
+		List<WebElement> FormatList = new ArrayList<>();
+		FormatList = driver.findElements(By.xpath("//*[@name='format']/*"));
+
+		Assert.assertEquals(FormatList.size(), 11, "Size of Formats list does NOT match expected number (11)");
+		System.out.println("Size of Format Options is " + FormatList.size());
+
+		for (int i = 0; i < FormatList.size(); i++) {
+
+			driver.findElement(By.xpath("//*[@name='format']")).click();
+			FormatList.get(i).click();
+			System.out.println(
+					"(1st Format Dropdown) Current Format selected :  " + FormatList.get(i).getText() + " (" + i + ")");
+		}
+
+		driver.findElement(By.xpath("//*[@name='vol_num']")).sendKeys("4");
+
+		driver.findElement(By.xpath("//*[@name='vol_title']")).sendKeys("Example Title");
+
+		driver.findElement(By.xpath("(//*[@class='btn btn-primary large-add'])[2]")).click();
+
+		// ELECTRONIC ISBN
+		driver.findElement(By.xpath("//*[@ng-model='formParams.series.isEformat'][2]")).click();
+		driver.findElement(By.xpath("//*[@ng-model='formParams.series.isEformat'][1]")).click();
+
+		driver.findElement(By.xpath("//*[@ng-required='!formParams.series.eformat_isbn']")).sendKeys("978-0613685726");
+
+		List<WebElement> FormatList2 = new ArrayList<>();
+		FormatList2 = driver.findElements(By.xpath("//*[@ng-model='formParams.series.eformat_format']/*"));
+
+		Assert.assertEquals(FormatList2.size(), 10,
+				"Size of Electronic Formats list does NOT match expected number (10)");
+		System.out.println("Size of Format Options is " + FormatList2.size());
+
+		for (int i = 0; i < FormatList2.size(); i++) {
+
+			driver.findElement(By.xpath("//*[@ng-model='formParams.series.eformat_format']")).click();
+			FormatList2.get(i).click();
+			System.out.println("(1st Format Dropdown) Current Format selected :  " + FormatList2.get(i).getText() + " ("
+					+ i + ")");
+		}
+
+		driver.findElement(By.xpath("//*[@ng-click='c.addEformatISBN(eISBNAdd)']")).click();
+		driver.findElement(By.xpath("//*[@class='btn btn-primary pull-right']")).click();
+
+	}
+
+	public void additionalInfo() {
+
+		// ADDITIONAL INFO AND SUMMARY
+		driver.findElement(By.xpath("//*[@ng-model='formParams.bookSum.summary']")).sendKeys("Example Summary");
+		driver.findElement(By.xpath("//*[@ng-model='formParams.bookSum.info']")).sendKeys("Account Info");
+		driver.findElement(By.xpath("//*[@class='btn btn-primary pull-right']")).click();
 	}
 
 	@Test
 	public void newLCCNRegistration() throws Throwable {
 
+
+		System.out.println("Beginning of Author LCCN Form");
+		
 		loginLCCN();
 		lccnGeneralInformation();
 		contributorInformation();
+		seriesVolumeInfo();
+		additionalInfo();
 
+		System.out.println("End of Author LCCN Form");
+		
 	}
 }
