@@ -65,4 +65,16 @@ public class Author_Application extends Base {
 		Assert.assertTrue(CreateAuthorAccount.equals("Create your Author Account"));
 		driver.quit();
 	}
+
+	@Test(priority = 5)
+	public void Verify_Author_LogOut() throws Throwable {
+		driver.get(AUTHORURL);
+		driver.findElement(By.xpath("//INPUT[@id='username']")).sendKeys("Loc1.Tester1");
+		driver.findElement(By.xpath("//INPUT[@id='passwor" + "d']")).sendKeys("LocTester@123!");
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//BUTTON[@name='login'][text()=' Login ']")).click();
+		driver.findElement(By.xpath("//*[@class='dropdown-toggle']")).click();
+		driver.findElement(By.xpath("(//*[@href='/logout.do?sysparm_goto_url=/auth'])[1]")).click();
+
+	}
 }

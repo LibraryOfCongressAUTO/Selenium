@@ -1,6 +1,5 @@
 package UnitTests;
 
-
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -10,11 +9,10 @@ public class Publisher_Application extends Base {
 
 	static String PUBLISHERURL = "https://locexternaldev.service-now.com/pub";
 	static String PUBLISHERTITLE = "CIP Publisher Login - CIP Publisher Portal";
-		
-	
+
 	@Test(priority = 0)
 	public void Verify_Publisher_URL() {
-		
+
 		driver.get(PUBLISHERURL);
 		System.out.println("Expected URL is : " + PUBLISHERURL);
 		System.out.println("Actual URL is : " + driver.getCurrentUrl());
@@ -28,7 +26,7 @@ public class Publisher_Application extends Base {
 		System.out.println("Actual Title is : " + driver.getTitle());
 		Assert.assertEquals(driver.getTitle(), PUBLISHERTITLE);
 	}
-	
+
 	@Test(priority = 2)
 	public void Positive_Publisher_Login() throws Throwable {
 		driver.get(PUBLISHERURL);
@@ -50,24 +48,20 @@ public class Publisher_Application extends Base {
 		driver.findElement(By.xpath("//BUTTON[@name='login'][text()=' Login ']")).click();
 		String ErrorMessage = driver.findElement(By.xpath("//*[@class='alert alert-danger ng-binding ng-scope']"))
 				.getText();
-		//if error message does not pop-up, fails test
+		// if error message does not pop-up, fails test
 		Assert.assertTrue(ErrorMessage.contains("invalid"));
 		driver.quit();
 	}
-	
-	
+
 	@Test(priority = 4)
 	public void Verify_New_Publisher_Button_Is_Enabled() throws Throwable {
 		driver.get(PUBLISHERURL);
 		driver.findElement(By.xpath("//A[@href='pub?id=pub_registration']")).click();
 		Thread.sleep(2000);
-		String welcomeToPCAT = driver.findElement(By.xpath("(//H3[text()='Welcome to P-CAT'])"))
-				.getText();
-		//if error message does not pop-up, fails test
+		String welcomeToPCAT = driver.findElement(By.xpath("(//H3[text()='Welcome to P-CAT'])")).getText();
+		// if error message does not pop-up, fails test
 		Assert.assertTrue(welcomeToPCAT.equals("Welcome to P-CAT"));
 		driver.quit();
 	}
 
-
-	
 }

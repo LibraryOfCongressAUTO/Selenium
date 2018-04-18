@@ -210,6 +210,12 @@ public class Publisher_Registration extends Base {
 		for (int i = 0; i < RegistrantInfo.size(); i++) {
 
 			System.out.println("(Registrant Info) " + RegistrantInfo.get(i).getText());
+		
+			// Check whether input field is blank
+			if(RegistrantInfo.get(i).getAttribute("value").isEmpty())
+			{
+			   System.out.println("Input field is empty");
+			}
 		}
 
 		// remove line once phone number bug is fixed

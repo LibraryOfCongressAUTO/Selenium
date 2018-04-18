@@ -205,6 +205,8 @@ public class LCCN_Application extends Base {
 					"(1st Format Dropdown) Current Format selected :  " + FormatList.get(i).getText() + " (" + i + ")");
 		}
 
+		driver.findElement(By.xpath("//*[@ng-model='formParams.series.other']")).sendKeys("ExampleOther");
+
 		driver.findElement(By.xpath("//*[@name='vol_num']")).sendKeys("4");
 
 		driver.findElement(By.xpath("//*[@name='vol_title']")).sendKeys("Example Title");
@@ -228,10 +230,11 @@ public class LCCN_Application extends Base {
 
 			driver.findElement(By.xpath("//*[@ng-model='formParams.series.eformat_format']")).click();
 			FormatList2.get(i).click();
-			System.out.println("(1st Format Dropdown) Current Format selected :  " + FormatList2.get(i).getText() + " ("
+			System.out.println("(2nd Format Dropdown) Current Format selected :  " + FormatList2.get(i).getText() + " ("
 					+ i + ")");
 		}
 
+		driver.findElement(By.xpath("//*[@ng-model='formParams.series.eformat_other']")).sendKeys("ExampleEBookOther");
 		driver.findElement(By.xpath("//*[@ng-click='c.addEformatISBN(eISBNAdd)']")).click();
 		driver.findElement(By.xpath("//*[@class='btn btn-primary pull-right']")).click();
 
@@ -248,9 +251,8 @@ public class LCCN_Application extends Base {
 	@Test
 	public void newLCCNRegistration() throws Throwable {
 
-
 		System.out.println("Beginning of Author LCCN Form");
-		
+
 		loginLCCN();
 		lccnGeneralInformation();
 		contributorInformation();
@@ -258,6 +260,6 @@ public class LCCN_Application extends Base {
 		additionalInfo();
 
 		System.out.println("End of Author LCCN Form");
-		
+
 	}
 }
