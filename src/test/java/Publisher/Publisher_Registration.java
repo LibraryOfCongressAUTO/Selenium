@@ -3,7 +3,9 @@ package Publisher;
 import java.util.ArrayList;
 import java.util.List;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import Util.Base;
@@ -50,8 +52,8 @@ public class Publisher_Registration extends Base {
 		driver.findElement(By.xpath("//INPUT[@id='regFirstName']")).sendKeys("Example1");
 		driver.findElement(By.xpath("//INPUT[@id='regLastName']")).sendKeys("Test1");
 		driver.findElement(By.xpath("//INPUT[@id='regPhone']")).sendKeys("1111111111");
-		driver.findElement(By.xpath("//INPUT[@id='regStreet1']")).sendKeys("testStreet1");
-		driver.findElement(By.xpath("//INPUT[@id='regStreet2']")).sendKeys("testStreetCont1");
+		driver.findElement(By.xpath("//INPUT[@id='regStreet1']")).sendKeys("testStreet1 example");
+		driver.findElement(By.xpath("//INPUT[@id='regStreet2']")).sendKeys("testStreetCont1 example");
 		driver.findElement(By.xpath("//INPUT[@id='regCity']")).sendKeys("testCity1");
 
 		List<WebElement> stateList1 = new ArrayList<>();
@@ -59,10 +61,11 @@ public class Publisher_Registration extends Base {
 
 		System.out.println("Size of State Options is " + stateList1.size());
 
-		for (int i = 0; i < stateList1.size(); i++) {
+		for (int i = 1; i < stateList1.size(); i++) {
 
 			driver.findElement(By.xpath("(//*[@ng-model='regState']/..)[1]")).click();
 			stateList1.get(i).click();
+			System.out.println(i);
 			System.out.println(
 					"(1st state dropdown) Current State selected :  " + stateList1.get(i).getText() + " (" + i + ")");
 		}
@@ -191,16 +194,17 @@ public class Publisher_Registration extends Base {
 
 	}
 
-	public void summaryPageSection() {
+	public void summaryPageSection() throws Throwable {
 
 		// Confirmation & Summary Page
 		Assert.assertEquals(driver.findElement(By.xpath("(//*[@class='confirm-submit-sec']/*)[1]")).getText(),
 				"CONFIRM AND SUBMIT");
 
-		// WebDriverWait wait = new WebDriverWait(driver, 10);
-		// WebElement element =
-		// wait.until(ExpectedConditions.elementToBeClickable(By.id("someid")));
+		List<WebElement> isCollapsed = new ArrayList<>();
+		isCollapsed = driver.findElements(By.xpath("//*[@class='collapsed']"));
+		Assert.assertEquals(isCollapsed.size(), 0);
 
+		// ------Registrant field verification-------------------------------
 		List<WebElement> RegistrantInfo = new ArrayList<>();
 		RegistrantInfo = driver.findElements(By.xpath("(//*[@id='registrant']/*/*/*)"));
 
@@ -210,19 +214,18 @@ public class Publisher_Registration extends Base {
 		for (int i = 0; i < RegistrantInfo.size(); i++) {
 
 			System.out.println("(Registrant Info) " + RegistrantInfo.get(i).getText());
-		
-			// Check whether input field is blank
-			if(RegistrantInfo.get(i).getAttribute("value").isEmpty())
-			{
-			   System.out.println("Input field is empty");
+
+			Boolean registrantIsEmpty = RegistrantInfo.get(i).getText().isEmpty();
+			if (registrantIsEmpty == true) {
+				System.out.println("Error! Registrant Field is Empty!");
 			}
 		}
 
-		// remove line once phone number bug is fixed
-		System.out.println(driver.findElement(By.xpath("((//*[@id='publisher']/*/*/*)[7]/*)[2]")).getText());
-
+		// ------Publisher field verification-------------------------------
 		List<WebElement> PublisherInfo = new ArrayList<>();
-		PublisherInfo = driver.findElements(By.xpath("(//*[@id='publisher']/*/*/*)"));
+		PublisherInfo = driver.findElements(By.xpath("((//*[@id='publisher']/*/*/*)/*[2])"));
+
+		// *[@id='publisher']/*/*/*)
 
 		Assert.assertEquals(PublisherInfo.size(), 8, "Size of publisher info is NOT (8)");
 		System.out.println("Size of Publisher Info fields populated is " + PublisherInfo.size());
@@ -230,6 +233,45 @@ public class Publisher_Registration extends Base {
 		for (int i = 0; i < PublisherInfo.size(); i++) {
 
 			System.out.println("(Publisher Info) " + PublisherInfo.get(i).getText());
+
+			Boolean publisherIsEmpty = PublisherInfo.get(i).getText().isEmpty();
+			if (publisherIsEmpty == true) {
+				System.out.println("Error! Publisher Field is Empty!");
+			}
+		}
+
+		// ------Primary Contact field verification-------------------------------
+		List<WebElement> PrimaryContactInfo = new ArrayList<>();
+		PrimaryContactInfo = driver.findElements(By.xpath("((//*[@id='primary-contact']/*/*/*)/*[2])"));
+
+		Assert.assertEquals(PrimaryContactInfo.size(), 9, "Size of Primary Contact info is NOT (9)");
+		System.out.println("Size of Primary Contact Info fields populated is " + PublisherInfo.size());
+
+		for (int i = 0; i < PrimaryContactInfo.size(); i++) {
+
+			System.out.println("(Primary Contact Info) " + PrimaryContactInfo.get(i).getText());
+
+			Boolean primaryContactIsEmpty = PrimaryContactInfo.get(i).getText().isEmpty();
+			if (primaryContactIsEmpty == true) {
+				System.out.println("Error! Primary Contact Field is Empty!");
+			}
+		}
+
+		// ------Senior Officer field verification-------------------------------
+		List<WebElement> SeniorOfficerInfo = new ArrayList<>();
+		SeniorOfficerInfo = driver.findElements(By.xpath("((//*[@id='senior-officer']/*/*/*)/*[2])"));
+
+		Assert.assertEquals(SeniorOfficerInfo.size(), 9, "Size of Senior Officer info is NOT (9)");
+		System.out.println("Size of Senior Officer Info fields populated is " + SeniorOfficerInfo.size());
+
+		for (int i = 0; i < SeniorOfficerInfo.size(); i++) {
+
+			System.out.println("(Senior Officer Info) " + SeniorOfficerInfo.get(i).getText());
+
+			Boolean seniorOfficerIsEmpty = SeniorOfficerInfo.get(i).getText().isEmpty();
+			if (seniorOfficerIsEmpty == true) {
+				System.out.println("Error! Senior Officer Field is Empty!");
+			}
 		}
 
 	}

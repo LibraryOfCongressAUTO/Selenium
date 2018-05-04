@@ -52,7 +52,7 @@ public class LCCN_Application extends Base {
 			languageOptions.get(y).click();
 			System.out.println("Current Language selected is : " + languageOptions.get(y).getText());
 		}
-		Assert.assertEquals(languageOptions.size(), 14);
+		Assert.assertEquals(languageOptions.size(), 15);
 
 		List<WebElement> monthOptions = new ArrayList<>();
 		monthOptions = driver.findElements(By.xpath("//*[@name='month']/*"));
@@ -174,10 +174,10 @@ public class LCCN_Application extends Base {
 		Thread.sleep(1000);
 		driver.findElement(By.xpath("//*[@ng-model='formParams.series.isSeries'][2]")).click();
 		driver.findElement(By.xpath("//*[@ng-model='formParams.series.isSeries'][1]")).click();
-
-		driver.findElement(By.xpath("//*[@name='seriesTitle']")).sendKeys("Series Title");
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//*[@ng-model='formParams.series.title']")).sendKeys("Series Title");
 		driver.findElement(By.xpath("//*[@name='series_volume']")).sendKeys("1");
-		driver.findElement(By.xpath("//*[@name='series_issn']")).sendKeys("123456789");
+		driver.findElement(By.xpath("//*[@name='series_issn']")).sendKeys("2049-3630");
 		driver.findElement(By.xpath("//*[@class='btn btn-primary large-add'][1]")).click();
 		Thread.sleep(1000);
 
@@ -248,6 +248,18 @@ public class LCCN_Application extends Base {
 		driver.findElement(By.xpath("//*[@class='btn btn-primary pull-right']")).click();
 	}
 
+	public void confirmAndSubmit() throws Throwable {
+
+		Thread.sleep(1000);
+		Assert.assertEquals(driver.findElement(By.xpath("(//*[@class='edit-button'])[1]")).getText(), "GENERAL INFORMATION");
+
+		//String HeaderVerify2 = driver.findElement(By.xpath("(//*[@class='edit-button'])[2]")).getText();
+		//Assert.assertEquals(HeaderVerify2, "CONTRIBUTION INFORMATION");
+
+		//String HeaderVerify3 = driver.findElement(By.xpath("(//*[@class='edit-button'])[3]")).getText();
+		//Assert.assertEquals(HeaderVerify3, "BOOK SUMMARY");
+	}
+
 	@Test
 	public void newLCCNRegistration() throws Throwable {
 
@@ -258,6 +270,7 @@ public class LCCN_Application extends Base {
 		contributorInformation();
 		seriesVolumeInfo();
 		additionalInfo();
+		confirmAndSubmit();
 
 		System.out.println("End of Author LCCN Form");
 

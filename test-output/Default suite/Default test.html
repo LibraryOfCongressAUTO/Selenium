@@ -57,9 +57,9 @@ function toggleAllBoxes() {
 <tr>
 <td>Tests passed/Failed/Skipped:</td><td>0/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Wed Apr 18 00:06:12 PDT 2018</td>
+<td>Started on:</td><td>Fri May 04 11:31:05 PDT 2018</td>
 </tr>
-<tr><td>Total time:</td><td>63 seconds (63552 ms)</td>
+<tr><td>Total time:</td><td>43 seconds (43840 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -76,9 +76,14 @@ function toggleAllBoxes() {
 </tr>
 <tr>
 <td title='Publisher.Publisher_Registration.NewPublisherRegistration()'><b>NewPublisherRegistration</b><br>Test class: Publisher.Publisher_Registration</td>
-<td><div><pre>java.lang.NullPointerException
-	at Publisher.Publisher_Registration.summaryPageSection(Publisher_Registration.java:221)
-	at Publisher.Publisher_Registration.NewPublisherRegistration(Publisher_Registration.java:260)
+<td><div><pre>java.lang.AssertionError: Size of state list does NOT match expected number (60) expected [60] but found [0]
+	at org.testng.Assert.fail(Assert.java:93)
+	at org.testng.Assert.failNotEquals(Assert.java:512)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:134)
+	at org.testng.Assert.assertEquals(Assert.java:115)
+	at org.testng.Assert.assertEquals(Assert.java:388)
+	at Publisher.Publisher_Registration.publisherInformationSection(Publisher_Registration.java:110)
+	at Publisher.Publisher_Registration.NewPublisherRegistration(Publisher_Registration.java:288)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
@@ -104,10 +109,15 @@ function toggleAllBoxes() {
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-</pre></div><a href='#' onClick='toggleBox("stack-trace893835279", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace893835279'><pre>java.lang.NullPointerException
-	at Publisher.Publisher_Registration.summaryPageSection(Publisher_Registration.java:221)
-	at Publisher.Publisher_Registration.NewPublisherRegistration(Publisher_Registration.java:260)
+</pre></div><a href='#' onClick='toggleBox("stack-trace1752856108", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1752856108'><pre>java.lang.AssertionError: Size of state list does NOT match expected number (60) expected [60] but found [0]
+	at org.testng.Assert.fail(Assert.java:93)
+	at org.testng.Assert.failNotEquals(Assert.java:512)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:134)
+	at org.testng.Assert.assertEquals(Assert.java:115)
+	at org.testng.Assert.assertEquals(Assert.java:388)
+	at Publisher.Publisher_Registration.publisherInformationSection(Publisher_Registration.java:110)
+	at Publisher.Publisher_Registration.NewPublisherRegistration(Publisher_Registration.java:288)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
@@ -134,7 +144,7 @@ function toggleAllBoxes() {
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 </pre></div></td>
-<td>59</td>
+<td>39</td>
 <td>Publisher.Publisher_Registration@305b7c14</td></tr>
 </table><p>
 </body>

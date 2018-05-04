@@ -3,9 +3,9 @@
 <suite name="Test Report">
 
 
-	<test name="Unit Test Report (Publisher Application)">
+	<test name="Unit Test Report (Publisher Interface)">
 		<classes>
-			<class name="UnitTests.Publisher_Application">
+			<class name="UnitTests.Publisher_Interface_Unit">
 				<methods>
 
 				</methods>
