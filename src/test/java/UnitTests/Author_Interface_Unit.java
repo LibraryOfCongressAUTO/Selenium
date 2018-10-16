@@ -35,7 +35,7 @@ public class Author_Interface_Unit extends Base {
 
 	@Test(priority = 2)
 	public void Positive_Author_Login() throws Throwable {
-		CM.authorLogin();
+		CM.authorLoginDEV();
 		String requestLCCN = driver.findElement(By.xpath("(//*[@href='?id=request_lccn']/*)[2]")).getText();
 		Assert.assertEquals(requestLCCN, "Request Library of Congress Control Number");
 		driver.quit();
@@ -68,7 +68,7 @@ public class Author_Interface_Unit extends Base {
 
 	@Test(priority = 5)
 	public void Verify_Author_LogOut() throws Throwable {
-		CM.authorLogin();
+		CM.authorLoginDEV();
 		CM.logout();	
 		driver.quit();
 

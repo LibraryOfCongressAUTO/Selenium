@@ -11,14 +11,14 @@ import org.testng.annotations.Test;
 import Methods.CommonMethods;
 import Util.Base;
 
-public class CIP_Application_Unit extends Base {
+public class CIP_Unit extends Base {
 
 	static String PUBLISHERURL = "https://locexternaldev.service-now.com/pub";
 	static CommonMethods CM = new CommonMethods();
 
 	@Test(priority = 0)
 	public void Navigate_To_CIP_Application() throws Throwable {
-		CM.publisherLogin();
+		CM.publisherLoginDEV();
 		Thread.sleep(1000);
 		String cipRequestData = driver.findElement(By.xpath("(//*[@ng-href='?id=request_cip'])/*[2]")).getText();
 		Assert.assertEquals(cipRequestData, "CIP Request Data");
@@ -36,7 +36,7 @@ public class CIP_Application_Unit extends Base {
 	@Test(priority = 2)
 	public void verify_CIP_WireFrames_Are_Enabled() throws Throwable {
 
-		CM.publisherLogin();
+		CM.publisherLoginDEV();
 		driver.findElement(By.xpath("(//*[@ng-href='?id=request_cip'])/*[1]")).click();
 
 		Thread.sleep(1000);

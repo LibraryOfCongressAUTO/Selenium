@@ -8,10 +8,30 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import Util.Base;
 
-public class LCCN_Application extends Base {
+public class LCCN extends Base {
 
-	static String AUTHORURL = "https://locexternaldev.service-now.com/auth";
+	static String AUTHORURL = "https://locexternaltest.service-now.com/auth";
 
+	@Test
+	public void newLCCNRegistration() throws Throwable {
+
+		System.out.println("Beginning of Author LCCN Form");
+
+		loginLCCN();
+		lccnGeneralInformation();
+		contributorInformation();
+		titlePageInfo();
+		seriesVolumeInfo();
+		additionalInfo();
+		confirmAndSubmit();
+
+		System.out.println("End of Author LCCN Form");
+
+		// driver.quit();
+
+	}
+
+	// -------------------------------------------------------------------------------------------
 	public void lccnGeneralInformation() throws Throwable {
 
 		driver.findElement(By.xpath("(//*[@href='?id=request_lccn']/*)[2]")).click();
@@ -21,26 +41,30 @@ public class LCCN_Application extends Base {
 		// first question
 		driver.findElement(By.xpath("//*[@ng-click='formParams.eFormat = true']")).click();
 		Thread.sleep(1000);
-		int ErrorMSG1 = driver.findElements(By.xpath("//*[@class='alert alert-danger ng-binding ng-scope']")).size();
-		System.out.println("1st Message : "
-				+ driver.findElement(By.xpath("//*[@class='alert alert-danger ng-binding ng-scope']")).getText());
+		int ErrorMSG1 = driver.findElements(By.xpath("//*[@class='alert alert-danger ng-scope']")).size();
+		System.out.println(
+				"1st Message : " + driver.findElement(By.xpath("//*[@class='alert alert-danger ng-scope']")).getText());
 		Assert.assertEquals(ErrorMSG1, 1);
 		driver.findElement(By.xpath("//*[@ng-click='formParams.eFormat = false']")).click();
 
 		// second question
 		driver.findElement(By.xpath("//*[@ng-model='formParams.periodicIntervals'][1]")).click();
-		int ErrorMSG2 = driver.findElements(By.xpath("//*[@class='alert alert-danger ng-binding ng-scope']")).size();
-		System.out.println("2nd Message : "
-				+ driver.findElement(By.xpath("//*[@class='alert alert-danger ng-binding ng-scope']")).getText());
+		int ErrorMSG2 = driver.findElements(By.xpath("//*[@class='alert alert-danger ng-scope']")).size();
+		System.out.println(
+				"2nd Message : " + driver.findElement(By.xpath("//*[@class='alert alert-danger ng-scope']")).getText());
 		Assert.assertEquals(ErrorMSG2, 1);
 		driver.findElement(By.xpath("//*[@ng-model='formParams.periodicIntervals'][2]")).click();
 
 		// third question
 		driver.findElement(By.xpath("(//*[@ng-model='formParams.cyAdults'])[1]")).click();
-		driver.findElement(By.xpath("(//*[@ng-model='formParams.cyAdults'])[2]")).click();
 
 		// # of pages
 		driver.findElement(By.xpath("(//*[@name='approxNumOfPages'])")).sendKeys("50");
+
+		// ---------------------------------------------------------------------------------------DO
+		// WORK KIDS CHOICES
+
+		driver.findElement(By.xpath("(//*[@ng-model='formParams.cyAdults'])[2]")).click();
 
 		List<WebElement> languageOptions = new ArrayList<>();
 		languageOptions = driver.findElements(By.xpath("//*[@name='languageOfText']/*"));
@@ -50,14 +74,14 @@ public class LCCN_Application extends Base {
 		for (int y = 0; y < languageOptions.size(); y++) {
 			driver.findElement(By.xpath("//*[@name='languageOfText']")).click();
 			languageOptions.get(y).click();
-			System.out.println("Current Language selected is : " + languageOptions.get(y).getText());
+			System.out.println("Current Language selected is : " + languageOptions.get(y).getText() + "(" + y + ")");
 		}
-		Assert.assertEquals(languageOptions.size(), 15);
+		Assert.assertEquals(languageOptions.size(), 16);
 
 		List<WebElement> monthOptions = new ArrayList<>();
 		monthOptions = driver.findElements(By.xpath("//*[@name='month']/*"));
 
-		System.out.println("Size of Language Options is " + monthOptions.size());
+		System.out.println("Size of month Options is " + monthOptions.size());
 
 		for (int y = 0; y < monthOptions.size(); y++) {
 			driver.findElement(By.xpath("//*[@name='month']")).click();
@@ -95,12 +119,12 @@ public class LCCN_Application extends Base {
 		// register a new author account
 		Thread.sleep(1000);
 
-		driver.findElement(By.xpath("//INPUT[@id='username']")).sendKeys("Loc1.Tester1");
-		driver.findElement(By.xpath("//INPUT[@id='password']")).sendKeys("LocTester@123!");
+		driver.findElement(By.xpath("//INPUT[@id='username']")).sendKeys("Publisher.Test1");
+		driver.findElement(By.xpath("//INPUT[@id='password']")).sendKeys("Publisher.test1!");
 		Thread.sleep(1000);
 		driver.findElement(By.xpath("//BUTTON[@name='login'][text()=' Login ']")).click();
 		String requestLCCN = driver.findElement(By.xpath("(//*[@href='?id=request_lccn']/*)[2]")).getText();
-		Assert.assertEquals(requestLCCN, "Request Library of Congress Control Number");
+		Assert.assertEquals(requestLCCN, "Request LCCN");
 
 	}
 
@@ -113,9 +137,7 @@ public class LCCN_Application extends Base {
 		driver.findElement(By.xpath("//*[@name='fName']")).sendKeys("FirstName");
 		driver.findElement(By.xpath("//*[@ng-model='contributor.middleName']")).sendKeys("MiddleName");
 		driver.findElement(By.xpath("//*[@name='lname']")).sendKeys("LastName");
-		driver.findElement(By.xpath("//*[@ng-model='contributor.birthMonth']")).sendKeys("01");
-		driver.findElement(By.xpath("//*[@ng-model='contributor.birthDay']")).sendKeys("02");
-		driver.findElement(By.xpath("//*[@ng-model='contributor.birthYear']")).sendKeys("2000");
+		driver.findElement(By.xpath("//*[@name='birthYear']")).sendKeys("1900");
 		driver.findElement(By.xpath("(//*[@ng-model='contributor.entryType'])")).click();
 		driver.findElement(By.xpath("(//*[@ng-model='contributor.entryType']/*)[2]")).click();
 
@@ -123,6 +145,12 @@ public class LCCN_Application extends Base {
 		addContributor.click();
 
 		// add organization
+
+		String selectedButton2 = driver.findElement(By.xpath("(//*[@ng-model='contributor.contribType'])[2]"))
+				.getText();
+		System.out.println(selectedButton2);
+		Assert.assertEquals(selectedButton2, "Organization");
+
 		driver.findElement(By.xpath("(//*[@ng-model='contributor.contribType'])[2]")).click();
 
 		driver.findElement(By.xpath("//*[@name='orgName']")).sendKeys("OrganizationName");
@@ -135,35 +163,6 @@ public class LCCN_Application extends Base {
 		driver.findElement(By.xpath("(//*[@ng-model='contributor.entryType']/*)[2]")).click();
 
 		addContributor.click();
-
-		driver.findElement(By.xpath("//*[@class='btn btn-primary pull-right']")).click();
-
-		// title page information
-		Thread.sleep(1000);
-
-		driver.findElement(By.xpath("//*[@ng-model='formParams.titlePage.title']")).sendKeys("Example Title");
-
-		driver.findElement(By.xpath("//*[@ng-model='formParams.titlePage.title']")).sendKeys("Example Subtitle");
-
-		driver.findElement(By.xpath("//*[@name='edition']")).sendKeys("Example Edition");
-
-		driver.findElement(By.xpath("//*[@name='titlePage.pubName']")).sendKeys("Example Title");
-
-		driver.findElement(By.xpath("//*[@name='titlePage.pubCity']")).sendKeys("Example City");
-
-		List<WebElement> stateList2 = new ArrayList<>();
-		stateList2 = driver.findElements(By.xpath("//*[@ng-model='formParams.titlePage.state']/*"));
-
-		Assert.assertEquals(stateList2.size(), 58, "Size of state list does NOT match expected number (58)");
-		System.out.println("Size of State Options is " + stateList2.size());
-
-		for (int i = 0; i < stateList2.size(); i++) {
-
-			driver.findElement(By.xpath("//*[@ng-model='formParams.titlePage.state']")).click();
-			stateList2.get(i).click();
-			System.out.println(
-					"(1st state dropdown) Current State selected :  " + stateList2.get(i).getText() + " (" + i + ")");
-		}
 
 		driver.findElement(By.xpath("//*[@class='btn btn-primary pull-right']")).click();
 
@@ -243,7 +242,8 @@ public class LCCN_Application extends Base {
 	public void additionalInfo() {
 
 		// ADDITIONAL INFO AND SUMMARY
-		driver.findElement(By.xpath("//*[@ng-model='formParams.bookSum.summary']")).sendKeys("Example Summary");
+		driver.findElement(By.xpath("//*[@ng-model='formParams.bookSum.summary']"))
+				.sendKeys("Example Summary....................");
 		driver.findElement(By.xpath("//*[@ng-model='formParams.bookSum.info']")).sendKeys("Account Info");
 		driver.findElement(By.xpath("//*[@class='btn btn-primary pull-right']")).click();
 	}
@@ -251,28 +251,46 @@ public class LCCN_Application extends Base {
 	public void confirmAndSubmit() throws Throwable {
 
 		Thread.sleep(1000);
-		Assert.assertEquals(driver.findElement(By.xpath("(//*[@class='edit-button'])[1]")).getText(), "GENERAL INFORMATION");
+		Assert.assertEquals(driver.findElement(By.xpath("(//*[@class='edit-button'])[1]")).getText(),
+				"GENERAL INFORMATION");
 
-		//String HeaderVerify2 = driver.findElement(By.xpath("(//*[@class='edit-button'])[2]")).getText();
-		//Assert.assertEquals(HeaderVerify2, "CONTRIBUTION INFORMATION");
+		// String HeaderVerify2 =
+		// driver.findElement(By.xpath("(//*[@class='edit-button'])[2]")).getText();
+		// Assert.assertEquals(HeaderVerify2, "CONTRIBUTION INFORMATION");
 
-		//String HeaderVerify3 = driver.findElement(By.xpath("(//*[@class='edit-button'])[3]")).getText();
-		//Assert.assertEquals(HeaderVerify3, "BOOK SUMMARY");
+		// String HeaderVerify3 =
+		// driver.findElement(By.xpath("(//*[@class='edit-button'])[3]")).getText();
+		// Assert.assertEquals(HeaderVerify3, "BOOK SUMMARY");
 	}
 
-	@Test
-	public void newLCCNRegistration() throws Throwable {
+	public void titlePageInfo() throws Throwable {
+		// title page information
+		Thread.sleep(1000);
 
-		System.out.println("Beginning of Author LCCN Form");
+		driver.findElement(By.xpath("//*[@ng-model='formParams.titlePage.title']")).sendKeys("LCCN Title Example");
 
-		loginLCCN();
-		lccnGeneralInformation();
-		contributorInformation();
-		seriesVolumeInfo();
-		additionalInfo();
-		confirmAndSubmit();
+		driver.findElement(By.xpath("//*[@ng-model='formParams.titlePage.subtitle']")).sendKeys("LCCN Subtitle Example");
 
-		System.out.println("End of Author LCCN Form");
+		driver.findElement(By.xpath("//*[@name='edition']")).sendKeys("LCCN Edition Example");
 
+		driver.findElement(By.xpath("//*[@name='titlePage.pubName']")).sendKeys("LCCN Publisher Name Example");
+
+		driver.findElement(By.xpath("//*[@name='titlePage.pubCity']")).sendKeys("LCCN City Example");
+
+		List<WebElement> stateList2 = new ArrayList<>();
+		stateList2 = driver.findElements(By.xpath("//*[@ng-model='formParams.titlePage.state']/*"));
+
+		Assert.assertEquals(stateList2.size(), 59, "Size of state list does NOT match expected number (59)");
+		System.out.println("Size of State Options is " + stateList2.size());
+
+		for (int i = 0; i < stateList2.size(); i++) {
+
+			driver.findElement(By.xpath("//*[@ng-model='formParams.titlePage.state']")).click();
+			stateList2.get(i).click();
+			System.out.println(
+					"Current State selected :  " + stateList2.get(i).getText() + " (" + i + ")");
+		}
+
+		driver.findElement(By.xpath("//*[@class='btn btn-primary pull-right']")).click();
 	}
 }

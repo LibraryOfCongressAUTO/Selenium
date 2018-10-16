@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import Methods.CommonMethods;
 import Util.Base;
 
-public class LCCN_Application_Unit extends Base {
+public class LCCN_Unit extends Base {
 
 	static String AUTHORURL = "https://locexternaldev.service-now.com/auth";
 	static String AUTHORTITLE = "CIP Author Login - CIP Author Portal";

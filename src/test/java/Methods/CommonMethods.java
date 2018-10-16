@@ -7,24 +7,24 @@ import Util.Base;
 public class CommonMethods extends Base {
 
 
-	String UserName = "Loc1.Tester1";
-	String Password = "LocTester@123!";
+	String UserNameDEV = "Loc1.Tester1";
+	String PasswordDEV = "LocTester@123!";
 
-	public void publisherLogin() throws Throwable {
+	public void publisherLoginDEV() throws Throwable {
 		String PUBLISHERURL = "https://locexternaldev.service-now.com/pub";
 		driver.get(PUBLISHERURL);
-		driver.findElement(By.xpath("//INPUT[@id='username']")).sendKeys(UserName);
-		driver.findElement(By.xpath("//INPUT[@id='password']")).sendKeys(Password);
+		driver.findElement(By.xpath("//INPUT[@id='username']")).sendKeys(UserNameDEV);
+		driver.findElement(By.xpath("//INPUT[@id='password']")).sendKeys(PasswordDEV);
 		Thread.sleep(500);
 		driver.findElement(By.xpath("//BUTTON[@name='login'][text()=' Login ']")).click();
 
 	}
 
-	public void authorLogin() throws Throwable {
+	public void authorLoginDEV() throws Throwable {
 		String AUTHORURL = "https://locexternaldev.service-now.com/auth";
 		driver.get(AUTHORURL);
-		driver.findElement(By.xpath("//INPUT[@id='username']")).sendKeys(UserName);
-		driver.findElement(By.xpath("//INPUT[@id='password']")).sendKeys(Password);
+		driver.findElement(By.xpath("//INPUT[@id='username']")).sendKeys(UserNameDEV);
+		driver.findElement(By.xpath("//INPUT[@id='password']")).sendKeys(PasswordDEV);
 		Thread.sleep(500);
 		driver.findElement(By.xpath("//BUTTON[@name='login'][text()=' Login ']")).click();
 	}

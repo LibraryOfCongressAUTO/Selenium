@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Test Report]" guice-stage="DEVELOPMENT">
-  <test name="Unit Test Report (Publisher Interface)(failed)">
+<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
+  <test name="Default test(failed)">
     <classes>
-      <class name="UnitTests.Publisher_Interface_Unit">
+      <class name="Publisher.Publisher_Registration">
         <methods>
-          <include name="Verify_Publisher_Title"/>
+          <include name="NewPublisherRegistration"/>
           <include name="setUp"/>
         </methods>
-      </class> <!-- UnitTests.Publisher_Interface_Unit -->
+      </class> <!-- Publisher.Publisher_Registration -->
     </classes>
-  </test> <!-- Unit Test Report (Publisher Interface)(failed) -->
-</suite> <!-- Failed suite [Test Report] -->
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

@@ -34,7 +34,7 @@ public class Publisher_Interface_Unit extends Base {
 
 	@Test(priority = 2)
 	public void Positive_Publisher_Login() throws Throwable {
-		CM.publisherLogin();
+		CM.publisherLoginDEV();
 		
 		String cipRequestData = driver.findElement(By.xpath("(//A[@ng-href='?id=request_cip']/*)[2]")).getText();
 		Assert.assertEquals(cipRequestData, "CIP Request Data");
@@ -69,7 +69,7 @@ public class Publisher_Interface_Unit extends Base {
 	
 	@Test(priority = 5)
 	public void Verify_Publisher_LogOut() throws Throwable {
-		CM.publisherLogin();
+		CM.publisherLoginDEV();
 		CM.logout();	
 		driver.quit();
 
